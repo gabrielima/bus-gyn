@@ -94,9 +94,18 @@
 		point_description.classList.add('point__description');
 		point_description.innerHTML = data['reference-point'];
 
+		var request_datetime = data['request-date'].split(' ');
+		var request_date = request_datetime[0].replace(/-/g, '/');
+		var request_time = request_datetime[1];
+
+		var datetime = document.createElement('p');
+		datetime.classList.add('datetime');
+		datetime.innerHTML = '<strong>' + request_date + ' às ' + request_time + '</strong>'
+
 		point.append(point_number);
 		point.append(point_address);
 		point.append(point_description);
+		point.append(datetime);
 
 		/* PROCESS BUS LINES DATA */
 		var bus_lines = data['bus-lines'];
