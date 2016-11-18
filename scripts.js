@@ -52,22 +52,20 @@
 				return;
 			}
 
-			//var data = getData(number);
-			try {
-				loadJSONP('http://easybus.tk/api/v1/point/' + number, buildResult);
-			} catch( err ) {
-				console.log(err);
-			}
+			$('.schedule__results').innerHTML = '';
+			$('.loading').style.display = 'block';
+			var data = getData(number);
 		});
 	}
 
 	function getData(number) {
 		var request = new XMLHttpRequest();
-		request.open('GET', 'http://easybus.tk/api/v1/point/' + number, true);
+		request.open('GET', 'http://localhost:8080/' + number, true);
 
 		request.onload = function() {
 		  if (request.status >= 200 && request.status < 400) {
 		    var data = JSON.parse(request.responseText);
+		    buildResult(data);
 		  } else {
 		  	showToast(false, 'Erro no servidor. Tente novamente');
 		  }
@@ -81,16 +79,12 @@
 	}
 
 	function buildResult(data) {
-		data = JSON.parse(data);
-		console.log(data);
-		if(!data) throw "Error";
-
 		/* PROCESS BUS STOP DATA */
 		var point = document.createElement('div');
 
 		var point_number = document.createElement('h3');
 		point_number.classList.add('point__number');
-		point_number.innerHTML = data.number;
+		point_number.innerHTML = 'Ponto ' + data.number;
 
 		var point_address = document.createElement('p');
 		point_address.classList.add('point__address');
@@ -109,7 +103,6 @@
 
 		var lines = document.createElement('div');
 		lines.classList.add('lines');
-
 
 		for(var i = 0; i < bus_lines.length; i++) {
 			var lines_item = document.createElement('div');
@@ -153,10 +146,14 @@
 
 			lines_item.append(lines_item_number);
 			lines_item.append(lines_item_time);
+
+			lines.append(lines_item);
 		}
 
-		$('.schedule__results').append(result[0]);
-		$('.schedule__results').append(result[1]);	
+		$('.schedule__results').append(point);
+		$('.schedule__results').append(lines);	
+		$('.loading').style.display = 'none';
+		$('.schedule__results').style.display = 'block';
 	}
 
 	function showToast(status, message) {
@@ -170,30 +167,4 @@
 	function $$(elem) {
 		return document.querySelectorAll(elem);
 	}
-
-	var loadJSONP = (function(){
-	  var unique = 0;
-	  return function(url, callback, context) {
-	    // INIT
-	    var name = "_jsonp_" + unique++;
-	    if (url.match(/\?/)) url += "&callback="+name;
-	    else url += "?callback="+name;
-	    
-	    // Create script
-	    var script = document.createElement('script');
-	    script.type = 'text/javascript';
-	    script.src = url;
-	    
-	    // Setup handler
-	    window[name] = function(data){
-	      callback.call((context || window), data);
-	      document.getElementsByTagName('head')[0].removeChild(script);
-	      script = null;
-	      delete window[name];
-	    };
-	    
-	    // Load JSON
-	    document.getElementsByTagName('head')[0].appendChild(script);
-	  };
-	})();	
 })();

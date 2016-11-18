@@ -12,8 +12,10 @@ app.use(function(req, res, next) {
 });
 
 app.get('/:number', function (req, res) {
+	console.log('Request !');
 	request('http://easybus.tk/api/v1/point/' + req.params.number, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
+	  	console.log(body);
 	    res.send(body);
 	  }
 	})

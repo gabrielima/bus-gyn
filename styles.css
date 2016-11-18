@@ -176,6 +176,34 @@
     0 1px 10px 0 rgba(0,0,0,.12);  
 }
 
+.loading {
+  position: relative;
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 40px auto;
+  border: 4px solid;
+  border-radius: 100%;
+  animation-name: loading;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out; 
+}
+
+.loading:after{
+  position: absolute;
+  content: '';
+  background-color: #fff;
+  width: 15px;
+  height: 10px;
+  top: -5px;
+  left: 30%;
+}
+
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .schedule__form {
   font-size: 0;
 } 
@@ -239,10 +267,6 @@
 
 .schedule__results {
   margin-top: 25px;
-  border-top: 1px solid rgba(0,0,0,0.3);
-}
-
-.schedule__results:empty {
   display: none;
 }
 
