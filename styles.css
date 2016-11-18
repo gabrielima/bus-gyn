@@ -345,3 +345,24 @@
     padding-right: calc(50% - 350px);
   }   
 }
+
+
+/**
+*  OFFLINE
+*  Colors and disabled inputs
+***/
+
+.offline .toolbar {
+  background-color: #797979;
+}
+.offline .schedule__form__submit {
+  background-color: #797979;
+  border-color: #797979;
+}
+.offline__message {
+  display: none;
+  background-color: #d4d4d4;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
