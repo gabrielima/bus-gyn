@@ -13,6 +13,7 @@ self.addEventListener('install', function(e) {
         './',
         './styles.css',
         './scripts.js',
+        './manifest.json',
         './imgs/icon-144.png',
         './imgs/icon-192.png',
         './imgs/icon-36.png',

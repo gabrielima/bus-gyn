@@ -14,32 +14,20 @@
 		}
 
 		window.addEventListener('online', function(e) {
-	    // Resync data with server.
 	    console.log("You are online");
-	    $('body').classList.remove('offline');
-	    $('.offline__message').style.display = 'none';
-	    $('.schedule__form__input').disabled = false;
-	    $('.schedule__form__submit').disabled = false;
+	    isOnline();
 		}, false);
 
 		window.addEventListener('offline', function(e) {
 	    console.log("You are offline");
-	    $('body').classList.add('offline');
-	    $('.offline__message').style.display = 'block';
-	    $('.schedule__form__input').disabled = true;
-	    $('.schedule__form__submit').disabled = true;    
+			isOffline();  
 		}, false);
 
-		// Check if the user is connected.
 		if (navigator.onLine) {
-	    //Arrivals.loadData();
+	    isOnline();
 		} else {
-		   // Show offline message
-	    //Page.showOfflineWarning();
-		}
-
-		// Set Knockout view model bindings.
-		//ko.applyBindings(Page.vm);		
+		   isOffline();
+		}	
 
 		$('.toolbar__icon').addEventListener('click', function(e) {
 			e.preventDefault();
@@ -204,6 +192,20 @@
 
 	function showToast(status, message) {
 		
+	}
+
+	function isOnline() {
+		$('body').classList.remove('offline');
+    $('.offline__message').style.display = 'none';
+    $('.schedule__form__input').disabled = false;
+    $('.schedule__form__submit').disabled = false;
+	}
+
+	function isOffline() {
+    $('body').classList.add('offline');
+    $('.offline__message').style.display = 'block';
+    $('.schedule__form__input').disabled = true;
+    $('.schedule__form__submit').disabled = true;  
 	}
 
 	function $(elem) {
