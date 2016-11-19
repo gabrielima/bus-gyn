@@ -1,4 +1,3 @@
-
 // https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/
 
 // Use a cacheName for cache versioning
