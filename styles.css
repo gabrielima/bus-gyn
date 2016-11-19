@@ -189,6 +189,7 @@
   animation-name: loading;
   animation-duration: 1s;
   animation-timing-function: ease-in-out; 
+  animation-iteration-count: infinite;
 }
 
 .loading:after{
